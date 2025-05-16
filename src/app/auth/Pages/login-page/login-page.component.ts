@@ -1,12 +1,12 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, ResourceStatus, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-login-page',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  // standalone: true,
+  imports: [ReactiveFormsModule],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css',
 })
@@ -29,32 +29,13 @@ export class LoginPageComponent {
 
   onSubmit() {
     if (this.loginForm.invalid) {
-      console.warn('⚠️ Formulario inválido. Valores:', this.loginForm.value);
       this.hasError.set(true);
-      setTimeout(() => this.hasError.set(false), 2000);
+      setTimeout(() => {
+        this.hasError.set(false);
+      }, 2000);
       return;
     }
-
     const { email = '', password = '' } = this.loginForm.value;
-    console.log('📤 Email:', email);
-    console.log('📤 Password:', password);
-
-    // Aquí puedes comentar esto si solo quieres ver en consola
-    this.authService.login(email!, password!).subscribe({
-      next: (isAuthenticated) => {
-        if (isAuthenticated) {
-          alert('✔️ Logueado con éxito');
-          return;
-        }
-        console.warn('❗ Credenciales incorrectas');
-        this.hasError.set(true);
-        setTimeout(() => this.hasError.set(false), 2000);
-      },
-      error: (err) => {
-        console.error('💥 Error del login:', err);
-        this.hasError.set(true);
-        setTimeout(() => this.hasError.set(false), 2000);
-      }
-    });
+    console.log({email,password})
   }
 }
