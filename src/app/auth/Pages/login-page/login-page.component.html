@@ -1,14 +1,14 @@
-<h1 class="text-2xl font-montserrat font-bold text-primary text-center bm-2">
+<h1 class="text-2xl font-montserrat font-bold text-primary text-center mb-2">
   LOGIN
 </h1>
+
 <form
-  action=""
   class="flex flex-col gap-3"
   [formGroup]="loginForm"
   (ngSubmit)="onSubmit()"
 >
   <label class="input validator">
-    <i class="bi bi-envelope opacity-3-"></i>
+    <i class="bi bi-envelope opacity-30"></i>
     <input
       type="email"
       placeholder="mail@site.com"
@@ -16,7 +16,7 @@
       formControlName="email"
     />
   </label>
-  <div class="validator-hint hidden">Enter valid email address</div>
+
   <div class="join">
     <div class="w-full">
       <label class="input validator join-item">
@@ -28,18 +28,21 @@
           formControlName="password"
         />
       </label>
-      <div class="validator-hint hidden">Enter valid email password</div>
     </div>
-    <a class="btn btn-neutral join-item" (click)="showPassword()">
-  <i [class]="icon"></i>  <!-- ← Usa solo el ícono de Bootstrap -->
-</a>
+    <a class="btn btn-neutral join-item" type="button" (click)="showPassword()">
+      <i [class]="icon"></i>
+    </a>
   </div>
+
   <button class="btn btn-secondary" type="submit">LOGIN</button>
 </form>
 
-@if (hasError()) {
-  <div role="alert" class="alert alert-error fixed bottom-5 right-5 w-80">
-    <i class="bi bi-x-circle"></i>
-    <span>Error! verifique la informacion </span>
-  </div>
-}
+<!-- Mostrar error si hasError está activo -->
+<div
+  role="alert"
+  class="alert alert-error fixed bottom-5 right-5 w-80"
+  [class.hidden]="!hasError()"
+>
+  <i class="bi bi-x-circle"></i>
+  <span>Error! Verifique la información</span>
+</div>
