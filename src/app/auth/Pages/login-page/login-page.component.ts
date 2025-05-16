@@ -61,6 +61,18 @@ export class LoginPageComponent {
     // });
 
     const { email = '', password = '' } = this.loginForm.value;
-    this.authService.login(email!, password!).subscribe((isAuthenticated = {}));
-  }
+       this.authService.login(email!, password!).subscribe((isAuthenticated)=>{
+        if (isAuthenticated) {
+          alert('logueado')
+          return
+        }
+        this.hasError.set(true);
+        setTimeout(() => {
+          this.hasError.set(false);
+        }, 2000);
+        return;
+       })
+    }
 }
+
+
