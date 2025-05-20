@@ -1,0 +1,8 @@
+@import url("https://fonts.googleapis.con/css2?family=Montserrat&family=Montserrat+Alternates&display=swap");
+@import "tailwindcss";
+@plugin "daisyui"{
+  themes: synthwave --default, night --prefersdark;
+}
+@theme{
+  --font-montserrat:"Montserrat Alternates",sans-serif;
+}
