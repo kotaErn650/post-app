@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -10,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginPageComponent {
   authService = inject(AuthService);
+  router = inject(Router);
   fb = inject(FormBuilder);
   hasError = signal(false);
   type = 'password';
@@ -30,29 +32,27 @@ export class LoginPageComponent {
     password: ['', [Validators.required, Validators.minLength(4)]],
   });
 
-   onSubmit() {
-     if (this.loginForm.invalid) {
-       this.hasError.set(true);
-       setTimeout(() => {
-         this.hasError.set(false);
-       }, 2000);
-       return;
-     }
-     const { email = '', password = '' } = this.loginForm.value;
-  console.log('Enviando login:', email, password);
+  onSubmit() {
+    if (this.loginForm.invalid) {
+      this.hasError.set(true);
+      setTimeout(() => {
+        this.hasError.set(false);
+      }, 2000);
+      return;
+    }
+    const { email = '', password = '' } = this.loginForm.value;
+    console.log('Enviando login:', email, password);
     this.authService.login(email!, password!).subscribe((isAuthenticated) => {
       if (isAuthenticated) {
         alert('logueado');
+        this.router.navigateByUrl('/dashboard');
         return;
       }
       this.hasError.set(true);
       setTimeout(() => {
         this.hasError.set(false);
       }, 2000);
-      return
+      return;
     });
-   }
-
-
-
+  }
 }
