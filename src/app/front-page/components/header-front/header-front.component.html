@@ -14,10 +14,24 @@
         <li><a>Home</a></li>
       </ul>
     </div>
-    <a class="btn btn-secondary lg:hidden" [routerLink]="['/auth/login']">LOGIN</a>
-    <ul class="menu menu-horizontal items-center px-1 hidden lg:flex">
+    <a class="btn btn-secondary lg:hidden" [routerLink]="['/auth/login']"
+      ><i class="bi bi-box-arrow-right"></i>LOGIN</a
+    >
+    <ul class="menu menu-horizontal items-center px-1 hidden lg:flex gap-2">
       <li><a>HOME</a></li>
-      <li><a class="btn btn-secondary" [routerLink]="['/auth/login']">LOGIN</a></li>
+      @if (authService.authStatus() === 'authenticated') {
+      <li>
+        <a class="btn btn-info" (click)="authService.logout()"
+          ><i class="bi bi-box-arrow-left"></i>LOGout</a
+        >
+      </li>
+      }@else {
+      <li>
+        <a class="btn btn-secondary" [routerLink]="['/auth/login']"
+          ><i class="bi bi-box-arrow-right"></i>LOGIN
+        </a>
+      </li>
+      }
     </ul>
   </div>
 </div>
