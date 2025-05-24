@@ -10,12 +10,12 @@ import { rxResource } from '@angular/core/rxjs-interop';
   styleUrl: './user-page.component.css',
 })
 export class UserPageComponent {
-  userService = inject(UserService);
+  userservice = inject(UserService);
 
   userResource = rxResource({
-    request: ()=>({}),
-    loader:  ()=>{
-      return this.userService.getUsers()
-    }
-  })
+    request: () => ({}),
+    loader: () => {
+      return this.userservice.getUsers();
+    },
+  });
 }

@@ -2,4 +2,5 @@
     <h1 class="text-2xl text-secondary">Lista de Usuarios</h1>
 </div>
 <div class="divider divider-secondary"></div>
-<user-table [users]=""></user-table>
+<user-table [users]="userResource.value()?.data?.users"></user-table> 
+

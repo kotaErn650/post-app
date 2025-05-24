@@ -7,6 +7,6 @@ import { Observable } from 'rxjs';
 })
 export class UserService extends BaseHttpService {
   getUsers(): Observable<any> {
-    return this, this.http.get(`{this.apiUrl}/users`);
+    return this.http.get(`${this.apiUrl}/users`);
   }
 }
